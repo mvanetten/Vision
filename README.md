@@ -1,4 +1,4 @@
-# Vision - A ASP.NET MVC5 Example
+# Vision - ASP.NET MVC5 Example
 
 Vision is a invoice webapplication to create and send invoices to customers.
 
