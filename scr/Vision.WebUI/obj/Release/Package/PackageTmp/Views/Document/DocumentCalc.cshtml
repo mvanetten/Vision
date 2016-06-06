@@ -1,0 +1,27 @@
+﻿
+@{ 
+    List<TaxCalc> taxcalc = ViewBag.DocumentLineCalc.GetTaxLines();
+    int rowspan = taxcalc.Count() + 4;
+}
+<tr>
+    <td colspan="4" rowspan="@rowspan"></td>
+    <td colspan="2">Korting</td>
+    <td align="right">@ViewBag.DocumentLineCalc.DiscountTotal().ToString("c2")</td>
+</tr>
+<tr>
+    <td colspan="2">Subtotaal</td>
+    <td align="right">@ViewBag.DocumentLineCalc.SubTotal().ToString("c2")</td>
+</tr>
+
+@foreach (TaxCalc i in taxcalc)
+{
+    <tr>
+            <td colspan="2">@i.TaxRate% over @i.Total.ToString("c2")</td>
+            <td align="right">@i.TotalTax.ToString("c2")</td>
+    </tr>
+}
+
+<tr>
+    <td>Totaal incl. Btw</td>
+    <td colspan="2" align="right">@ViewBag.DocumentLineCalc.Total().ToString("c2")</td>
+</tr>

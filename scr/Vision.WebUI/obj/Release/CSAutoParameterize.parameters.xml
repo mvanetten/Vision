@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DBVisionContext-Web.config Connection String" description="DBVisionContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=Vision;Integrated Security=true;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Mark\\Documents\\Visual\ Studio\ 2015\\Projects\\Vision\\Vision\.WebUI\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DBVisionContext']/@connectionString" />
+  </parameter>
+</parameters>

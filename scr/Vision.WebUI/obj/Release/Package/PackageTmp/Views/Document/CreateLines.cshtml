@@ -1,0 +1,54 @@
+﻿@model Document
+
+
+
+@for (int i = 0; i < Model.DocumentLine.Count; i++)
+{
+    <tr>
+        <td>
+            @if (Model.DocumentLine.Count == i + 1 && Model.DocumentLine.Count > 1)
+            {
+                <button name="button" class="btn btn-warning" value="removeline"> - </button>
+            }
+            
+            @Html.HiddenFor(model => model.DocumentLine[i].documentlineID)
+            @Html.HiddenFor(model => model.DocumentLine[i].documentID)
+        </td>
+        <td>
+            @Html.EditorFor(model => model.DocumentLine[i].quantity, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DocumentLine[i].quantity, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.EditorFor(model => model.DocumentLine[i].description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DocumentLine[i].description, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.EditorFor(model => model.DocumentLine[i].price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DocumentLine[i].price, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            @Html.EditorFor(model => model.DocumentLine[i].discountpercentage, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DocumentLine[i].discountpercentage, "", new { @class = "text-danger" })
+        </td>
+        <td>
+            <select id="DocumentLine_@i.ToString()__taxID" name="DocumentLine[@i.ToString()].taxID">
+                @foreach (Tax item in ViewBag.taxID)
+                {
+                    if (Model.DocumentLine[i].taxID == item.taxID)
+                    {
+                        <option selected value="@item.taxID">@item.displayname</option>
+                    }
+
+                    else
+                    {
+                        <option value="@item.taxID">@item.displayname</option>
+                    }
+
+                }
+            </select>
+        </td>
+        <td align="right" class="total">
+            @Html.DisplayFor(model => model.DocumentLine[i].total)
+        </td>
+    </tr>
+}

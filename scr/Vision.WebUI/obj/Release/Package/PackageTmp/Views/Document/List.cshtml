@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Vision.Domain.Entities.Document>
+
+@{
+    ViewBag.Title = "Overzicht facturen";
+}
+
+<h4>Overzicht facturen</h4>
+<hr />
+<p>
+    @Html.ActionLink("Nieuw", "Create", "Document", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>Factuur</th>
+                <th>@Html.DisplayNameFor(model => model.invoice_date)</th>
+                <th>@Html.DisplayNameFor(model => model.Contact)</th>
+                <th>Prijs</th>
+                <th>@Html.DisplayNameFor(model => model.documentstatus)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.documentnumber.ToString(), "Edit", new { id = item.documentID }) </td>
+                <td>@item.invoice_date</td>
+                <td>@item.Contact.name</td>
+                <td>@item.DocumentLine.Sum(x => x.total + x.totaltax).ToString("c2")</td>
+                <td>@item.invoice_date</td>
+                <td>@item.documentstatus</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

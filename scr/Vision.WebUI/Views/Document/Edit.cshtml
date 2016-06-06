@@ -1,0 +1,97 @@
+﻿@model Vision.Domain.Entities.Document
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+    @using (Html.BeginForm("Edit", "Document", FormMethod.Post, new { @id = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Document</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.documentID)
+                    @Html.LabelFor(model => model.contactID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ContactID")
+                    </div>
+                </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.subject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.subject, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.invoice_date, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.invoice_date, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.invoice_date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1"></th>
+                            <th class="col-md-1">Quantity</th>
+                            <th class="col-md-5">Description</th>
+                            <th class="col-md-1">Price</th>
+                            <th class="col-md-1">Discount</th>
+                            <th class="col-md-1">Tax</th>
+                            <th class="col-md-1">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @Html.Partial("CreateLines", Model)
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button name="button" class="btn btn-primary" value="AppendLine">+</button>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        @Html.Partial("DocumentCalc")
+                    </tfoot>
+                </table>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.footnote, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.footnote, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.footnote, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <button name="button" class="btn btn-primary" value="Save">Opslaan</button>
+                        <button name="button" class="btn btn-success" value="SaveAndSend">Opslaan en verzenden</button>
+                    </div>
+                </div>
+            </div>
+    }
+
+    @section Scripts
+    {
+        <script>
+            $(document).ready(function () {
+
+            });
+            $("table").change(function () {
+                $("#form").submit();
+            });
+        </script>
+    }
+    

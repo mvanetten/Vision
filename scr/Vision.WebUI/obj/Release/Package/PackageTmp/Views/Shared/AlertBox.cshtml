@@ -1,0 +1,12 @@
+﻿@if (TempData["message"] != null)
+{
+    if (TempData["title"] == null)
+    {
+        TempData["title"] = "";
+    }
+    if (TempData["status"] == null)
+    {
+        TempData["status"] = "info";
+    }
+    @Html.AlertBox(TempData["title"].ToString(), TempData["message"].ToString(), TempData["status"].ToString())
+}
